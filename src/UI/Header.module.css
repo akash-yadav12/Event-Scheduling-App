@@ -23,7 +23,7 @@
 
 .header li {
   margin: 0 1rem;
-  width: 5rem;
+  /*width: 5rem;*/
 }
 
 .header a {
@@ -37,4 +37,15 @@
   color: #95bcf0;
   padding-bottom: 0.25rem;
   border-bottom: 4px solid #95bcf0;
+}
+
+.header button{
+  background: #95bcf0;
+  border: none;
+  padding: .7rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.header button:hover{
+  opacity: .9;
 }
