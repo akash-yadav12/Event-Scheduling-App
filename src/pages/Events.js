@@ -19,12 +19,11 @@ const Events = () => {
 
 
 
-	return {events && (<div>
-		{events.map(event => (
+	return <div>
+		{events ? (events.map(event => (
 			<p>{event.name}</p>
-		))}
-	</div>)}
-		{!events && <div>No Events Yet</div>}
+		))) : (<div>No Events Yet</div>)}
+		</div>
 }
 
 export default Events
