@@ -20,19 +20,19 @@ const Register = () => {
 		fetch('https://ik-react-task.herokuapp.com/accounts/register/', {
 			method:"POST",
 			headers:{
-				'Accept': 'application/json',
 				'Content-Type':'application/json'
 			},
 			body:JSON.stringify(data)
 		}).then(res => res.json())
 			.then(resData => {
-				if(resData.success){
-					alert('User Registered Successfully!!')
-				}else{
+				console.log(resData,'what is')
+				if(resData.errors){
 					alert(resData.errors)
+				}else{
+					alert(resData.message)
 				}
 
-				history.push('/login')
+				history.replace('/login')
 			})
 			.catch(err=>console.log(err))
 		.catch(err => {
