@@ -1,5 +1,5 @@
 import './App.css';
-import {useContext} from 'react'
+import {useContext,useState} from 'react'
 import {Route,Switch,Redirect} from 'react-router-dom'
 import Login from './pages/Login'
 import Register from './pages/Register'
@@ -10,9 +10,20 @@ import AuthContext from './store/auth-context'
 function App() {
 
   const authCtx = useContext(AuthContext)
+  const [showAddEvent, setShowAddEvent] = useState(false)
+
+  const showAddEventHandler = () => {
+    setShowAddEvent(true)
+  }
+  const hideAddEventHandler = () => {
+    setShowAddEvent(false)
+  }
   return (
+
+
     <div className="App">
-      <Header/>
+      <Header showAddEventHandler={showAddEventHandler}/>
+      {showAddEvent && <NewEvent hideAddEventHandler={hideAddEventHandler}/>}
       <Switch>
         {!authCtx.isLoggedIn ? (<Route path="/" exact><Redirect to="/login"/></Route>) : null}
         {!authCtx.isLoggedIn && <Route path="/login"><Login /></Route>}

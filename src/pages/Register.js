@@ -1,6 +1,5 @@
 import {useState} from 'react'
 import AuthForm from '../UI/AuthForm'
-import classes from './Login.module.css'
 import {useHistory} from 'react-router-dom'
 const Register = () => {
 	const history = useHistory()
