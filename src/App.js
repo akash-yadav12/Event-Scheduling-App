@@ -1,21 +1,18 @@
 import './App.css';
-import {useReducer,useState,useContext} from 'react'
+import {useState,useContext} from 'react'
 import {Route,Switch,Redirect} from 'react-router-dom'
 import Login from './components/pages/Login'
 import Register from './components/pages/Register'
 import Events from './components/pages/Events'
 import Header from './components/UI/Header'
 import NewEvent from './components/AddEvent/AddEvent'
-// import AuthContext from './store/AuthContext'
 import AuthContext from './store/AuthContext'
 
 
 function App() {
 
   const {authState,dispatch} = useContext(AuthContext)
-  // console.log(useReducer(AuthReducer),'why?')
   const [showAddEvent, setShowAddEvent] = useState(false)
-  console.log(authState,'kech')
   const showAddEventHandler = () => {
     setShowAddEvent(true)
   }

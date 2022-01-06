@@ -1,4 +1,4 @@
-import {useReducer,useContext} from 'react'
+import {useContext} from 'react'
 import {NavLink} from 'react-router-dom'
 import classes from './Header.module.css'
 import AuthContext from '../../store/AuthContext'
