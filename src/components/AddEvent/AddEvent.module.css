@@ -1,0 +1,55 @@
+.evtForm{
+}
+
+.evtForm option{
+	color: white;
+}
+.evtForm select {
+	color: white;
+}
+.red{
+	background: red;
+}
+.blue{
+	background: blue;
+}
+.evtForm .cyan{
+	background: cyan;
+	color: #222;
+}
+.grey{
+	background: gray;
+}
+.green{
+	background: green;
+}
+.black{
+	background: black;
+}
+.evtForm .yellow{
+	background: yellow;
+	color: #222;
+}
+.orange{
+	background: orange;
+}
+.brown{
+	background: brown;
+}
+.evtForm .pink{
+	background: pink;
+	color: #222;
+}
+.crimson{
+	background: crimson;
+}
+.evtForm .white{
+	color: #222;
+	background: white;
+}
+.purple{
+	background: purple;
+}
+.darkblue{
+	background: darkblue;
+}

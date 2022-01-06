@@ -11,7 +11,7 @@ import AuthContext from './store/AuthContext'
 
 function App() {
 
-  const {authState,dispatch} = useContext(AuthContext)
+  const {authState} = useContext(AuthContext)
   const [showAddEvent, setShowAddEvent] = useState(false)
   const showAddEventHandler = () => {
     setShowAddEvent(true)
