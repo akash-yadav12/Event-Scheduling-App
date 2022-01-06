@@ -1,7 +1,7 @@
 import {useState,useContext} from 'react'
 import {useHistory} from 'react-router-dom'
 import AuthForm from '../UI/AuthForm'
-import AuthContext from '../store/auth-context'
+import AuthContext from '../../store/AuthContext'
 
 const Login = () => {
 

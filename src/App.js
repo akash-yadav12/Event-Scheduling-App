@@ -1,12 +1,12 @@
 import './App.css';
 import {useContext,useState} from 'react'
 import {Route,Switch,Redirect} from 'react-router-dom'
-import Login from './pages/Login'
-import Register from './pages/Register'
-import Events from './pages/Events'
-import Header from './UI/Header'
-import NewEvent from './components/NewEvent'
-import AuthContext from './store/auth-context'
+import Login from './components/pages/Login'
+import Register from './components/pages/Register'
+import Events from './components/pages/Events'
+import Header from './components/UI/Header'
+import NewEvent from './components/NewEvent/NewEvent'
+import AuthContext from './store/AuthContext'
 function App() {
 
   const authCtx = useContext(AuthContext)

@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import AuthForm from '../UI/AuthForm'
 import {useHistory} from 'react-router-dom'
+
 const Register = () => {
 	const history = useHistory()
 	const [email, setEmail] = useState('')
