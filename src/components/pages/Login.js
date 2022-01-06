@@ -5,7 +5,7 @@ import AuthContext from '../../store/AuthContext'
 
 const Login = () => {
 
-	const authCtx = useContext(AuthContext)
+	const {dispatch} = useContext(AuthContext)
 	const history = useHistory()
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
@@ -32,7 +32,8 @@ const Login = () => {
 				if(resData["non_field_errors"]){
 					alert(resData["non_field_errors"][0])
 				}else{
-					authCtx.login(resData.token)
+					localStorage.setItem('auth',resData.token)
+					dispatch({type:'LOGIN',token:resData.token})
 					history.replace('/events')
 				}
 			})

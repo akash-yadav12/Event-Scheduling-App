@@ -1,35 +1,32 @@
-import React, {useState} from 'react'
-const AuthContext = React.createContext({
-	token:'',
-	isLoggedIn: false,
-	login: (token) => {},
-	logout: () => {}
-})
+import React, {useReducer} from 'react'
+const AuthContext = React.createContext()
+
+const initialState = {
+  token:localStorage.getItem('auth'),
+  isLoggedIn: localStorage.getItem('auth') && localStorage.getItem('auth').length > 0
+}
 
 export const AuthContextProvider = (props) => {
 
-	const [token,setToken] = useState(localStorage.getItem('auth'))
-	const userIsLoggedIn = !!token
+	const [authState,dispatch] = useReducer(AuthReducer,initialState)
 
-	const loginHandler = (token) => {
-		setToken(token)
-		localStorage.setItem("auth",token)
+	return <AuthContext.Provider value={{authState,dispatch}}>{props.children}</AuthContext.Provider>
+}
 
+
+export const AuthReducer = (state=initialState,action) => {
+	if(action.type === 'LOGIN'){
+		return {
+			token:action.token,
+			isLoggedIn: true
+		}
 	}
-
-	const logoutHandler = () => {
-		setToken(null)
-		localStorage.removeItem("auth")
+	if(action.type === 'LOGOUT'){
+		return {
+			token:null,
+			isLoggedIn: false
+		}
 	}
-
-	const contextValue = {
-		token:token,
-		isLoggedIn: userIsLoggedIn,
-		login:loginHandler,
-		logout: logoutHandler
-	}
-
-	return <AuthContext.Provider value={contextValue}>{props.children}</AuthContext.Provider>
 }
 
 export default AuthContext

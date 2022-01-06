@@ -1,4 +1,5 @@
 import classes from './AuthForm.module.css'
+
 const AuthForm = props => {
 	return <form onSubmit={props.submitHandler} className={classes.form}>
 			<h2>{props.title}</h2>
