@@ -5,7 +5,7 @@ import Login from './components/pages/Login'
 import Register from './components/pages/Register'
 import Events from './components/pages/Events'
 import Header from './components/UI/Header'
-import NewEvent from './components/AddEvent/AddEvent'
+import AddEvent from './components/AddEvent/AddEvent'
 import AuthContext from './store/AuthContext'
 
 
@@ -24,7 +24,7 @@ function App() {
 
     <div className="App">
       <Header showAddEventHandler={showAddEventHandler}/>
-      {showAddEvent && <NewEvent hideAddEventHandler={hideAddEventHandler}/>}
+      {showAddEvent && <AddEvent hideAddEventHandler={hideAddEventHandler}/>}
       <Switch>
         {!authState.isLoggedIn ? (<Route path="/" exact><Redirect to="/login"/></Route>) : null}
         {!authState.isLoggedIn && <Route path="/login"><Login /></Route>}

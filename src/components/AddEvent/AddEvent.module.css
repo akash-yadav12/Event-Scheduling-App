@@ -13,7 +13,8 @@
 .blue{
 	background: blue;
 }
-.evtForm .cyan{
+.evtForm .cyan,
+.cyan{
 	background: cyan;
 	color: #222;
 }
@@ -26,7 +27,8 @@
 .black{
 	background: black;
 }
-.evtForm .yellow{
+.evtForm .yellow,
+.yellow{
 	background: yellow;
 	color: #222;
 }
@@ -36,7 +38,8 @@
 .brown{
 	background: brown;
 }
-.evtForm .pink{
+.evtForm .pink,
+.yellow{
 	background: pink;
 	color: #222;
 }
@@ -52,4 +55,27 @@
 }
 .darkblue{
 	background: darkblue;
+}
+
+.wrapperEvent{
+	margin: 20px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+.card{
+	margin: 15px;
+	box-shadow: 2px 4px 6px rgba(0,0,0,.25);
+	width: 400px;
+	max-width: 90%;
+	transition: all .4s ease;
+	color: white;
+}
+.card .cyan{
+	color: #000;
+}
+.card:hover{
+	transform: translateY(-4px);
+	box-shadow: 4px 4px 20px rgba(0,0,0,.4);
 }
