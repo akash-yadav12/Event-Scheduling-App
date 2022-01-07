@@ -1,6 +1,9 @@
-import {useContext,useEffect} from 'react'
+import {useContext,useEffect,useState} from 'react'
 import classes from '../AddEvent/AddEvent.module.css'
 import EventsContext from '../../store/EventsContext'
+import Modal from '../UI/Modal'
+import FullCalendar from '@fullcalendar/react'
+import dayGridPlugin from '@fullcalendar/daygrid' 
 
 const EventTypesColors = {
     "Bootcamp":'grey',
@@ -21,7 +24,7 @@ const EventTypesColors = {
 
 const Events = () => {
 	const {eventsState,dispatch} = useContext(EventsContext)
-
+	const [showCalendar, setShowCalendar] = useState(false)
 	useEffect(() => {
 		fetch('https://ik-react-task.herokuapp.com/events', {
 			method:'GET',
@@ -36,17 +39,33 @@ const Events = () => {
 	},[dispatch])
 
 
+	const showCalendarHandler = (e) => {
+		setShowCalendar(true)
+	}
 
-	return <div className={classes.wrapperEvent}>
+	const hideCalendarHandler = (e) => {
+		setShowCalendar(false)
+	}
+	return <>
+		{showCalendar && (<Modal onClose={hideCalendarHandler}>
+		<FullCalendar
+        plugins={[ dayGridPlugin ]}
+        initialView="dayGridMonth"
+        events={eventsState.calendarEvents}
+      />
+      </Modal>)}
+      <button className={classes.calendarBtn} onClick={showCalendarHandler}>Show Calendar</button>
+		<div className={classes.wrapperEvent}>
 		{eventsState.events  ? (eventsState.events.map(event => (
 			<div className={`${classes.card} ${classes[EventTypesColors[event.event_type]]}`} key={event.id}>
 				<h2>Event Name: {event.name.toUpperCase()}</h2>
 				<h3>Event Type: {event.event_type}</h3>
-				<h5>Starts on {new Date(event.start).toString().substring(0,16)} <br/>@{new Date(event.start).toString().substring(16,21)}</h5>
-				<h5>Ends on {new Date(event.end).toString().substring(0,16)} <br/>@{new Date(event.end).toString().substring(16,21)}</h5>
+				<h5>Starts on: {new Date(event.start).toString().substring(0,16)} <br/>@{new Date(event.start).toString().substring(16,21)}</h5>
+				<h5>Ends on: {new Date(event.end).toString().substring(0,16)} <br/>@{new Date(event.end).toString().substring(16,21)}</h5>
 			</div>
 		))) : (<div>No Events Yet</div>)}
 		</div>
+		</>
 }
 
 export default Events

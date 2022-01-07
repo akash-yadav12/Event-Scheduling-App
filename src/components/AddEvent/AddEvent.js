@@ -68,7 +68,6 @@ const NewEvent = (props) => {
 		.then(res => res.json())
 		.then(resData=> {
 			if(resData.success === false){
-				console.log(resData)
 				alert(resData.message + " please select different slot")
 				return
 			}else{
