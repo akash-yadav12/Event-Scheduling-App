@@ -87,9 +87,8 @@
 .crimson{
 	background: crimson;
 }
-.evtForm .white{
-	color: #222;
-	background: white;
+.grey{
+	background: grey;
 }
 .purple{
 	background: purple;
@@ -159,4 +158,12 @@
 }
 .calendarBtn:active{
 	transform: scale(.98) translateY(0);
+}
+.status{
+	background: #fff;
+	color: #222;
+	width: 250px;
+	margin: auto;
+	border-radius: 15px;
+	margin-bottom: 10px;
 }

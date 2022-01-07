@@ -6,6 +6,25 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid' 
 import {EventTypesColors} from '../Shared/EventTypesColors'
 
+const DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24
+
+const checkEventStatus = (st, ed) => {
+	const now = Date.parse(new Date())
+	if(st <= now && ed > now){
+		return "Event in Progress"
+	}else if(st<now && ed < now){
+		return "Event Compeleted"
+	}else{
+		const t = (st-now)/DAY_IN_MILLISECONDS
+		if(t< 1){
+			return `Around ${Math.round(t*24)} ${Math.round(t*24) == 1 ? 'Hour' :'Hours'} to the Event`
+		}else{
+			return `${Math.round(t)} ${Math.round(t) == 1 ? 'Day':'Days'} to the Event`
+		}
+	}
+
+}
+
 const Events = () => {
 	const {eventsState,dispatch} = useContext(EventsContext)
 	const [showCalendar, setShowCalendar] = useState(false)
@@ -44,9 +63,9 @@ const Events = () => {
 		{eventsState.events  ? (eventsState.events.map(event => (
 			<div className={`${classes.card} ${classes[EventTypesColors[event.event_type]]}`} key={event.id}>
 				<h2>Event Name: {event.name.toUpperCase()}</h2>
-				<h3>Event Type: {event.event_type}</h3>
-				<h5>Starts on: {new Date(event.start).toString().substring(0,16)} <br/>@{new Date(event.start).toString().substring(16,21)}</h5>
-				<h5>Ends on: {new Date(event.end).toString().substring(0,16)} <br/>@{new Date(event.end).toString().substring(16,21)}</h5>
+				<p>This {event.event_type} will <strong>start on {new Date(event.start).toString().substring(0,16)} @{new Date(event.start).toString().substring(16,21)} and it will end on {new Date(event.end).toString().substring(0,16)} @{new Date(event.end).toString().substring(16,21)}</strong>
+				</p>
+				<div className={classes.status}>{checkEventStatus(Date.parse(event.start), Date.parse(event.end))}</div>
 			</div>
 		))) : (<div>No Events Yet</div>)}
 		</div>

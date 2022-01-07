@@ -18,7 +18,7 @@ const EventTypes = [
     {type:"Music events",color:'brown'},
     {type:"Networking events",color:'pink'},
     {type:"Product launches", color:'crimson'},
-    {type:"Sports events",color:'white'},
+    {type:"Sports events",color:'grey'},
     {type:"Sponsored runs",color:'purple'},
     {type:"Trade shows",color:'darkblue'}
 ]
@@ -65,10 +65,15 @@ const NewEvent = (props) => {
 				return
 			}
 		}
+		const fs = new Date(start + ' '+ (startTime+":00")) 
+		if(Date.parse(fs) < Date.parse(new Date())){
+			alert('Please select the start time of the event as the future date')
+			return
+		}
 		const data = {
 			name:evtName,
 			event_type:evtType.type,
-			start:new Date(start + ' '+ (startTime+":00")),
+			start:fs,
 			end: new Date(end + ' '+ (endTime+":00"))
 		}
 

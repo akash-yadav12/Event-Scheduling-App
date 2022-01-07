@@ -10,7 +10,7 @@ export const EventTypesColors = {
     "Music events":'brown',
     "Networking events":'pink',
     "Product launches":'crimson',
-    "Sports events":'white',
+    "Sports events":'grey',
     "Sponsored runs":'purple',
    	"Trade shows":'darkblue'
 }
