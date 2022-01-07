@@ -1,4 +1,5 @@
 import React, {useReducer} from 'react'
+import {EventTypesColors} from '../components/Shared/EventTypesColors'
 
 const EventsContext = React.createContext()
 
@@ -17,7 +18,7 @@ export const EventsReducer = (state=initialState, action) => {
 	if(action.type === 'FETCH_EVENTS'){
 		const clEvts = []
 		for(let el of action.events){
-			clEvts.push({title:el.name,date:el.start})
+			clEvts.push({title:el.name,date:el.start,backgroundColor:EventTypesColors[el.event_type]})
 		}
 		return {
 			events: action.events,

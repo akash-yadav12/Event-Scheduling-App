@@ -4,23 +4,7 @@ import EventsContext from '../../store/EventsContext'
 import Modal from '../UI/Modal'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid' 
-
-const EventTypesColors = {
-    "Bootcamp":'grey',
-    "Charity":'blue',
-    "Charitable auctions":'green',
-    "Exhibitions":'red',
-    "Corporate":'cyan',
-    "Family":'black',
-    "Fundraising":'yellow',
-    "Holiday":'orange',
-    "Music events":'brown',
-    "Networking events":'pink',
-    "Product launches":'crimson',
-    "Sports events":'white',
-    "Sponsored runs":'purple',
-   	"Trade shows":'darkblue'
-}
+import {EventTypesColors} from '../Shared/EventTypesColors'
 
 const Events = () => {
 	const {eventsState,dispatch} = useContext(EventsContext)
