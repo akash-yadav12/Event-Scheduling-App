@@ -1,8 +1,9 @@
 import Modal from '../UI/Modal'
-import {useState} from 'react'
+import {useState,useContext} from 'react'
 import classes from './AddEvent.module.css'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
+import EventsContext from '../../store/EventsContext'
 
 
 const EventTypes = [
@@ -29,6 +30,7 @@ const NewEvent = (props) => {
 	const [endDate,setEndDate] = useState('')
 	const [startTime, setStartTime] = useState('')
 	const [endTime, setEndTime] = useState('')
+	const {eventsState, dispatch} = useContext(EventsContext)
 
 	const nameChangeHandler = e =>{
 		setEvtName(e.target.value)
@@ -72,7 +74,8 @@ const NewEvent = (props) => {
 			}else{
 				alert('New Event Added Successfully')
 				props.hideAddEventHandler()
-				console.log(resData)}
+				dispatch({type:'FETCH_EVENTS',events:[...eventsState.events, resData]})
+			}
 			}
 		)
 		.catch(err => console.log(err))

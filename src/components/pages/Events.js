@@ -40,10 +40,10 @@ const Events = () => {
 	return <div className={classes.wrapperEvent}>
 		{eventsState.events  ? (eventsState.events.map(event => (
 			<div className={`${classes.card} ${classes[EventTypesColors[event.event_type]]}`} key={event.id}>
-				<h2>{event.name.toUpperCase()}</h2>
-				<h3>{event.event_type}</h3>
-				<h5>{new Date(event.start).toString().substring(0,16)} <br/>@{new Date(event.start).toString().substring(16,21)}</h5>
-				<h5>{new Date(event.end).toString().substring(0,16)} <br/>@{new Date(event.end).toString().substring(16,21)}</h5>
+				<h2>Event Name: {event.name.toUpperCase()}</h2>
+				<h3>Event Type: {event.event_type}</h3>
+				<h5>Starts on {new Date(event.start).toString().substring(0,16)} <br/>@{new Date(event.start).toString().substring(16,21)}</h5>
+				<h5>Ends on {new Date(event.end).toString().substring(0,16)} <br/>@{new Date(event.end).toString().substring(16,21)}</h5>
 			</div>
 		))) : (<div>No Events Yet</div>)}
 		</div>

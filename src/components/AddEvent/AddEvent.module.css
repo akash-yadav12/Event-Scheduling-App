@@ -71,6 +71,9 @@
 	max-width: 90%;
 	transition: all .4s ease;
 	color: white;
+	box-sizing: border-box;
+	padding: 10px;
+	border-radius: 10px;
 }
 .card .cyan{
 	color: #000;
