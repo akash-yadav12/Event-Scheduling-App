@@ -82,6 +82,7 @@ const NewEvent = (props) => {
 	}
 
 	return <Modal onClose={props.hideAddEventHandler}>
+		<div className={classes.close} onClick={props.hideAddEventHandler} title="close modal"> 𐤕 </div>
 		<h1>Add New Event</h1>
 		<form onSubmit={submitEventHandler} className={classes.evtForm}>
 			<input onChange={nameChangeHandler} required type="text" placeholder="enter event name"/>

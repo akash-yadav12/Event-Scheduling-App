@@ -32,6 +32,7 @@ const Events = () => {
 	}
 	return <>
 		{showCalendar && (<Modal onClose={hideCalendarHandler}>
+		<div className={classes.close} onClick={hideCalendarHandler} title="close modal"> 𐤕 </div>
 		<FullCalendar
         plugins={[ dayGridPlugin ]}
         initialView="dayGridMonth"
