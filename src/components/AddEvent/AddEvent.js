@@ -7,7 +7,7 @@ import EventsContext from '../../store/EventsContext'
 
 
 const EventTypes = [
-    {type:"Bootcamp",color:'grey'},
+    {type:"Bootcamp",color:'navy'},
     {type:"Charity",color:'blue'},
     {type:"Charitable auctions",color:'green'},
     {type:"Exhibitions", color:'red'},
@@ -22,6 +22,18 @@ const EventTypes = [
     {type:"Sponsored runs",color:'purple'},
     {type:"Trade shows",color:'darkblue'}
 ]
+
+const checkDurValid = (st, ed) => {
+	if(st[0] === ed[0]){
+		return ed[1]-st[1] >= 30
+	}else if(ed[0]-st[0] == 1){
+		const t = (60-st[1])+(+ed[1])
+		return  t >= 30
+	}else{
+		return true
+	}
+}
+
 const NewEvent = (props) => {
 
 	const [evtName, setEvtName] = useState('')
@@ -47,6 +59,9 @@ const NewEvent = (props) => {
 		if(start === end){
 			if(endTime <= startTime){
 				alert('please select end time greater than startTime')
+				return
+			}else if(!checkDurValid(startTime.split(":"),endTime.split(":"))){
+				alert('Please make sure duration of the event is atleast 30 minutes')
 				return
 			}
 		}
@@ -83,31 +98,39 @@ const NewEvent = (props) => {
 
 	return <Modal onClose={props.hideAddEventHandler}>
 		<div className={classes.close} onClick={props.hideAddEventHandler} title="close modal"> 𐤕 </div>
-		<h1>Add New Event</h1>
+		<h1 align="center">Add New Event</h1>
 		<form onSubmit={submitEventHandler} className={classes.evtForm}>
-			<input onChange={nameChangeHandler} required type="text" placeholder="enter event name"/>
-			<select onChange={selectChangeHandler} value={evtType.type} className={classes[evtType.color]}>
-				{EventTypes.map(type => (
-					<option key={type.type} className={classes[type.color]}>{type.type}</option>
-				))}
-			</select>
-			<div>
-			<DatePicker
-				selected={startDate}
-				onChange={date => setStartDate(date)}
-				minDate={new Date()}
-				required
-	  		/>
-	  		<input required type="time" placeholder="start time" onChange={e=>setStartTime(e.target.value)} value={startTime}/>
+			<div className={classes.input}>
+				<label>Enter Event Name</label>
+				<input minLength="3" onChange={nameChangeHandler} required type="text" placeholder="enter event name"/>
 			</div>
-			<div>
-	  		<DatePicker
-				selected={endDate}
-				onChange={date => setEndDate(date)}
-				minDate={startDate}
-				required
-	  		/>
-	  		<input required type="time" placeholder="End time" onChange={e=>{console.log((new Date()).toString().substring(16,24)); setEndTime(e.target.value)}} value={endTime}/>
+			<div className={classes.select}>
+				<label>Select Event Type</label>
+				<select onChange={selectChangeHandler} value={evtType.type} className={classes[evtType.color]}>
+					{EventTypes.map(type => (
+						<option key={type.type} className={classes[type.color]}>{type.type}</option>
+					))}
+				</select>
+			</div>
+			<div className={classes.timeslot}>
+				<div>Start Date and Time</div>
+				<DatePicker
+					selected={startDate}
+					onChange={date => setStartDate(date)}
+					minDate={new Date()}
+					required
+		  		/>
+		  		<input required type="time" placeholder="start time" onChange={e=>setStartTime(e.target.value)} value={startTime}/>
+			</div>
+			<div className={classes.timeslot}>
+				<div>End Date and Time</div>
+		  		<DatePicker
+					selected={endDate}
+					onChange={date => setEndDate(date)}
+					minDate={startDate}
+					required
+		  		/>
+		  		<input required type="time" placeholder="End time" onChange={e=>{console.log((new Date()).toString().substring(16,24)); setEndTime(e.target.value)}} value={endTime}/>
 			</div>
 	  		<button type="submit">Add Event</button>
 		</form>

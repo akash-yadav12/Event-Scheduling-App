@@ -9,7 +9,7 @@ const AuthForm = props => {
 			</div>
 			<div className={classes.input}>
 			<label htmlFor="password">Password:</label>
-			<input onChange={props.passwordChangeHandler} id="password" type="password" placeholder="enter password"/>
+			<input minLength="4" onChange={props.passwordChangeHandler} id="password" type="password" placeholder="enter password"/>
 			</div>
 			<button type="submit">{props.btnText}</button>
 		</form>

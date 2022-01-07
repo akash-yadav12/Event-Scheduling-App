@@ -1,5 +1,5 @@
 export const EventTypesColors = {
-    "Bootcamp":'grey',
+    "Bootcamp":'navy',
     "Charity":'blue',
     "Charitable auctions":'green',
     "Exhibitions":'red',
