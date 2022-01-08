@@ -1,6 +1,7 @@
 .form{
 	width: 400px;
 	height: 350px;
+	max-width: 90%;
 	background: #95bcf0 ;
 	display: flex;
 	justify-content: center;
