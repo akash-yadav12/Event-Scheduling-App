@@ -17,9 +17,12 @@ const checkEventStatus = (st, ed) => {
 	}else{
 		const t = (st-now)/DAY_IN_MILLISECONDS
 		if(t< 1){
-			return `Around ${Math.round(t*24)} ${Math.round(t*24) == 1 ? 'Hour' :'Hours'} to the Event`
+			if(t*24 < 1){
+				return `${Math.round(t*24*60)} ${Math.round(t*24*60) === 1 ? 'Minute' :'Minutes'} to the Event`
+			}
+			return `${Math.round(t*24)} ${Math.round(t*24) === 1 ? 'Hour' :'Hours'} to the Event`
 		}else{
-			return `${Math.round(t)} ${Math.round(t) == 1 ? 'Day':'Days'} to the Event`
+			return `${Math.round(t)} ${Math.round(t) === 1 ? 'Day':'Days'} to the Event`
 		}
 	}
 
@@ -61,7 +64,7 @@ const Events = () => {
       <button className={classes.calendarBtn} onClick={showCalendarHandler}>Show Calendar</button>
 		<div className={classes.wrapperEvent}>
 		{eventsState.events  ? (eventsState.events.map(event => (
-			<div className={`${classes.card} ${classes[EventTypesColors[event.event_type]]}`} key={event.id}>
+			<div className={`${classes.card} ${classes[EventTypesColors[event.event_type]]} ${checkEventStatus(Date.parse(event.start),Date.parse(event.end)) === "Event Compeleted" ? classes.completed: ''}`} key={event.id}>
 				<h2>Event Name: {event.name.toUpperCase()}</h2>
 				<p>This {event.event_type} will <strong>start on {new Date(event.start).toString().substring(0,16)} @{new Date(event.start).toString().substring(16,21)} and it will end on {new Date(event.end).toString().substring(0,16)} @{new Date(event.end).toString().substring(16,21)}</strong>
 				</p>

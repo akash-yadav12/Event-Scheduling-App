@@ -24,6 +24,7 @@
 	grid-template-columns: 30% 40% 30%;
 	grid-template-rows: 1fr;
 }
+
 .evtForm button{
 	background: #082032;
 	border: none;
@@ -166,4 +167,18 @@
 	margin: auto;
 	border-radius: 15px;
 	margin-bottom: 10px;
+}
+.completed{
+	cursor: not-allowed;
+	opacity: .6;
+}
+
+@media (max-width: 600px){
+	.timeslot{
+		grid-template-columns: 30% 60%;
+		grid-template-rows: 2fr;
+	}
+	.calendarBtn{
+		left: 60vw;
+	}
 }

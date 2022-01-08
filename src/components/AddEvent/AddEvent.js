@@ -26,7 +26,7 @@ const EventTypes = [
 const checkDurValid = (st, ed) => {
 	if(st[0] === ed[0]){
 		return ed[1]-st[1] >= 30
-	}else if(ed[0]-st[0] == 1){
+	}else if(ed[0]-st[0] === 1){
 		const t = (60-st[1])+(+ed[1])
 		return  t >= 30
 	}else{
@@ -34,7 +34,7 @@ const checkDurValid = (st, ed) => {
 	}
 }
 
-const NewEvent = (props) => {
+const AddEvent = (props) => {
 
 	const [evtName, setEvtName] = useState('')
 	const [evtType,setEvtType] = useState(EventTypes[0])
@@ -142,4 +142,4 @@ const NewEvent = (props) => {
 	</Modal>
 }
 
-export default NewEvent
+export default AddEvent
