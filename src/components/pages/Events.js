@@ -28,6 +28,15 @@ const checkEventStatus = (st, ed) => {
 
 }
 
+const get12HoursTime = (time) => {
+	const hr = +time.substring(0,2)
+	if(hr > 12){
+		return `${hr-12 < 9 ? '0'+(hr-12) : hr-12}:${time.substring(3,5)}PM`
+	}else{
+		return time+"AM"
+	}
+}
+
 const Events = () => {
 	const {eventsState,dispatch} = useContext(EventsContext)
 	const [showCalendar, setShowCalendar] = useState(false)
@@ -66,7 +75,7 @@ const Events = () => {
 		{eventsState.events  ? (eventsState.events.map(event => (
 			<div className={`${classes.card} ${classes[EventTypesColors[event.event_type]]} ${checkEventStatus(Date.parse(event.start),Date.parse(event.end)) === "Event Compeleted" ? classes.completed: ''}`} key={event.id}>
 				<h2>Event Name: {event.name.toUpperCase()}</h2>
-				<p>This {event.event_type} will <strong>start on {new Date(event.start).toString().substring(0,16)} @{new Date(event.start).toString().substring(16,21)} and it will end on {new Date(event.end).toString().substring(0,16)} @{new Date(event.end).toString().substring(16,21)}</strong>
+				<p>This {event.event_type} will <strong>start on {new Date(event.start).toString().substring(0,16)} @{get12HoursTime(new Date(event.start).toString().substring(16,21))} and it will end on {new Date(event.end).toString().substring(0,16)} @{get12HoursTime(new Date(event.end).toString().substring(16,21))}</strong>
 				</p>
 				<div className={classes.status}>{checkEventStatus(Date.parse(event.start), Date.parse(event.end))}</div>
 			</div>
