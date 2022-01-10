@@ -1,30 +1,44 @@
-import React, {useReducer} from 'react'
-import {EventTypesColors} from '../components/Shared/EventTypesColors'
+import React, { useReducer } from "react";
 
-const EventsContext = React.createContext()
+import PropTypes from "prop-types";
+
+import { EventTypesColors } from "../components/Shared/EventTypesColors";
+
+const EventsContext = React.createContext();
 
 const initialState = {
-	events: [],
-	calendarEvents:[]
-}
+  calendarEvents: [],
+  events: [],
+};
 export const EventsContextProvider = (props) => {
-	const [eventsState, dispatch] = useReducer(EventsReducer,initialState)
+  const [eventsState, dispatch] = useReducer(EventsReducer, initialState);
 
-	return <EventsContext.Provider value={{eventsState,dispatch}}>{props.children}</EventsContext.Provider>
-}
+  return (
+    <EventsContext.Provider value={{ dispatch, eventsState }}>
+      {props.children}
+    </EventsContext.Provider>
+  );
+};
 
+export const EventsReducer = (state = initialState, action) => {
+  if (action.type === "FETCH_EVENTS") {
+    const clEvts = [];
+    for (const el of action.events) {
+      clEvts.push({
+        backgroundColor: EventTypesColors[el.event_type],
+        date: el.start,
+        title: el.name,
+      });
+    }
+    return {
+      calendarEvents: clEvts,
+      events: action.events,
+    };
+  }
+};
 
-export const EventsReducer = (state=initialState, action) => {
-	if(action.type === 'FETCH_EVENTS'){
-		const clEvts = []
-		for(let el of action.events){
-			clEvts.push({title:el.name,date:el.start,backgroundColor:EventTypesColors[el.event_type]})
-		}
-		return {
-			events: action.events,
-			calendarEvents:clEvts
-		}
-	}
-}
+export default EventsContext;
 
-export default EventsContext
+EventsContextProvider.propTypes = {
+  children: PropTypes.any,
+};
