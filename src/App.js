@@ -17,38 +17,40 @@ function App() {
   const hideAddEventHandler = () => {
     setShowAddEvent(false);
   };
+  const PrivateRoute = (props) => {
+    return authState.isLoggedIn ? (
+      <Route {...props} />
+    ) : (
+      <Redirect to="/login" />
+    );
+  };
+  const PublicRoute = (props) => {
+    return !authState.isLoggedIn ? (
+      <Route {...props} />
+    ) : (
+      <Redirect to="/events" />
+    );
+  };
   return (
     <div className="App">
       <Header showAddEventHandler={showAddEventHandler} />
       {showAddEvent && <AddEvent hideAddEventHandler={hideAddEventHandler} />}
       <Switch>
-        {!authState.isLoggedIn ? (
-          <Route path="/" exact>
-            <Redirect to="/login" />
-          </Route>
-        ) : null}
-        {!authState.isLoggedIn && (
-          <Route path="/login">
-            <Login />
-          </Route>
-        )}
-        {!authState.isLoggedIn && (
-          <Route path="/register">
-            {" "}
-            <Register />{" "}
-          </Route>
-        )}
-        {authState.isLoggedIn && (
-          <Route path="/events">
-            {" "}
-            <Events />
-          </Route>
-        )}
-        {authState.isLoggedIn && (
-          <Route exact path="/">
-            <Redirect to="/events" />
-          </Route>
-        )}
+        (
+        <PublicRoute path="/login">
+          <Login />
+        </PublicRoute>
+        <PublicRoute path="/register">
+          {" "}
+          <Register />{" "}
+        </PublicRoute>
+        <PrivateRoute path="/events">
+          {" "}
+          <Events />
+        </PrivateRoute>
+        <PrivateRoute exact path="/">
+          <Redirect to="/events" />
+        </PrivateRoute>
         <Route path="*">
           <Redirect to="/" />
         </Route>
