@@ -9,7 +9,7 @@ export const useToastMessage = () => {
   useEffect(() => {
     const el = document.createElement("div");
     el.id = portalId;
-    el.style = "position: fixed; top: 5.5rem; right: 10px;z-index:100";
+    el.style = "position: fixed; top: 5.5rem; right: 25px;z-index:100";
     document.body.prepend(el);
 
     setLoaded(true);
