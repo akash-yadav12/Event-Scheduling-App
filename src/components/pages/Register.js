@@ -1,13 +1,15 @@
 /* eslint-disable sort-keys */
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 
 import AuthForm from "../UI/AuthForm";
+import ToastMessage from "../UI/ToastMessage";
 
 const Register = () => {
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const toastRef = useRef();
   const emailChangeHandler = (e) => {
     setEmail(e.target.value);
   };
@@ -28,29 +30,45 @@ const Register = () => {
     })
       .then((res) => res.json())
       .then((resData) => {
-        console.log(resData, "what is");
         if (resData.errors) {
-          alert(resData.errors);
+          toastRef.current.addToastMessage({
+            message: resData.errors,
+            type: "error",
+          });
+        } else if (resData.email) {
+          toastRef.current.addToastMessage({
+            message: resData.email[0],
+            type: "error",
+          });
         } else {
-          alert(resData.message);
+          toastRef.current.addToastMessage({
+            message: resData.message + " Redirecting to the login page",
+            type: "success",
+          });
+          setTimeout(() => {
+            history.replace("/login");
+          }, 2000);
         }
-
-        history.replace("/login");
       })
-      .catch((err) => console.log(err))
       .catch((err) => {
-        console.log(err);
+        toastRef.current.addToastMessage({
+          message: JSON.stringify(err),
+          type: "error",
+        });
       });
   };
 
   return (
-    <AuthForm
-      emailChangeHandler={emailChangeHandler}
-      passwordChangeHandler={passwordChangeHandler}
-      btnText="Register"
-      title="Register a new account"
-      submitHandler={submitHandler}
-    />
+    <>
+      <ToastMessage ref={toastRef} />
+      <AuthForm
+        emailChangeHandler={emailChangeHandler}
+        passwordChangeHandler={passwordChangeHandler}
+        btnText="Register"
+        title="Register a new account"
+        submitHandler={submitHandler}
+      />
+    </>
   );
 };
 

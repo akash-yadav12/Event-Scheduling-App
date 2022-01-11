@@ -3,7 +3,7 @@
 /* eslint-disable sort-keys */
 // eslint-disable jsx-a11y/click-events-have-key-events
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 
 import FullCalendar from "@fullcalendar/react";
 // eslint-disable-next-line import/order
@@ -13,6 +13,7 @@ import EventsContext from "../../store/EventsContext";
 import classes from "../AddEvent/AddEvent.module.css";
 import { EventTypesColors } from "../Shared/EventTypesColors";
 import Modal from "../UI/Modal";
+import ToastMessage from "../UI/ToastMessage";
 
 const DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24;
 
@@ -56,7 +57,10 @@ const get12HoursTime = (time) => {
 const Events = () => {
   const { eventsState, dispatch } = useContext(EventsContext);
   const [showCalendar, setShowCalendar] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const toastRef = useRef();
   useEffect(() => {
+    setIsLoading(true);
     fetch("https://ik-react-task.herokuapp.com/events", {
       method: "GET",
       headers: {
@@ -66,9 +70,16 @@ const Events = () => {
     })
       .then((res) => res.json())
       .then((resData) => {
+        setIsLoading(false);
         dispatch({ type: "FETCH_EVENTS", events: resData });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setIsLoading(false);
+        toastRef.current.addToastMessage({
+          message: JSON.stringify(err),
+          type: "error",
+        });
+      });
   }, [dispatch]);
 
   const showCalendarHandler = (e) => {
@@ -78,8 +89,10 @@ const Events = () => {
   const hideCalendarHandler = (e) => {
     setShowCalendar(false);
   };
+  if (isLoading) return <p align="center">Loading....</p>;
   return (
     <>
+      <ToastMessage ref={toastRef} />
       {showCalendar && (
         <Modal onClose={hideCalendarHandler}>
           <div
@@ -101,7 +114,7 @@ const Events = () => {
         Show Calendar
       </button>
       <div className={classes.wrapperEvent}>
-        {eventsState.events ? (
+        {eventsState.events.length > 0 ? (
           eventsState.events.map((event) => (
             <div
               className={`${classes.card} ${
