@@ -22,13 +22,6 @@ export const AuthContextProvider = (props) => {
 };
 
 export const AuthReducer = (state = initialState, action) => {
-  if (action.type === "LOGIN_REQUEST") {
-    return {
-      isLoggedIn: state.isLoggedIn,
-      isLoading: true,
-      token: state.token,
-    };
-  }
   if (action.type === "LOGIN") {
     return {
       isLoggedIn: true,

@@ -27,9 +27,7 @@ const AuthForm = (props) => {
           placeholder="enter password"
         />
       </div>
-      <button type="submit" disabled={props.isDisabled}>
-        {props.btnText}
-      </button>
+      <button type="submit">{props.btnText}</button>
     </form>
   );
 };
@@ -39,7 +37,6 @@ export default AuthForm;
 AuthForm.propTypes = {
   btnText: PropTypes.string,
   emailChangeHandler: PropTypes.func,
-  isDisabled: PropTypes.bool,
   passwordChangeHandler: PropTypes.func,
   submitHandler: PropTypes.func,
   title: PropTypes.string,
