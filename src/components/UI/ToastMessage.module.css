@@ -1,0 +1,56 @@
+.toastWrap {
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+}
+.toast {
+  width: 250px;
+  display: flex;
+  min-height: 75px;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 1;
+  padding: 15px;
+  color: white;
+  border-radius: 5px;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 2px rgb(69, 69, 69);
+
+  transition: 0.2s;
+  animation: fadeIn 0.75s;
+  overflow: hidden;
+}
+.toast::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+  height: 5px;
+  animation: shrink 2.05s linear;
+}
+.success {
+  background-color: green;
+}
+.error {
+  background-color: red;
+}
+@keyframes shrink {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
