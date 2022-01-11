@@ -7,6 +7,7 @@ import { EventTypesColors } from "../components/Shared/EventTypesColors";
 const EventsContext = React.createContext();
 
 const initialState = {
+  isLoading: false,
   calendarEvents: [],
   events: [],
 };
@@ -21,6 +22,13 @@ export const EventsContextProvider = (props) => {
 };
 
 export const EventsReducer = (state = initialState, action) => {
+  if (action.type === "FETCH_EVENTS_REQUEST") {
+    return {
+      isLoading: true,
+      calendarEvents: state.calendarEvents,
+      events: state.events,
+    };
+  }
   if (action.type === "FETCH_EVENTS") {
     const clEvts = [];
     for (const el of action.events) {
@@ -31,6 +39,7 @@ export const EventsReducer = (state = initialState, action) => {
       });
     }
     return {
+      isLoading: false,
       calendarEvents: clEvts,
       events: action.events,
     };

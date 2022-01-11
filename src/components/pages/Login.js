@@ -8,11 +8,10 @@ import AuthForm from "../UI/AuthForm";
 import ToastMessage from "../UI/ToastMessage";
 
 const Login = () => {
-  const { dispatch } = useContext(AuthContext);
+  const { authState, dispatch } = useContext(AuthContext);
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [btnDisabled, setBtnDisabled] = useState(false);
   const toastRef = useRef();
   const emailChangeHandler = (e) => {
     setEmail(e.target.value);
@@ -23,7 +22,9 @@ const Login = () => {
   };
   const submitHandler = (e) => {
     e.preventDefault();
-    setBtnDisabled(true);
+    console.log(authState, "pre");
+    dispatch({ type: "LOGIN_REQUEST" });
+    console.log(authState);
     const data = { email, password };
     fetch("https://ik-react-task.herokuapp.com/accounts/login/", {
       method: "POST",
@@ -63,7 +64,7 @@ const Login = () => {
         submitHandler={submitHandler}
         title="Login to Continue"
         btnText="Login"
-        isDisabled={btnDisabled}
+        isDisabled={authState.isLoading}
       />
     </>
   );

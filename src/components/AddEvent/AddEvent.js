@@ -102,7 +102,7 @@ const AddEvent = (props) => {
       start: fs,
       end: new Date(end + " " + (endTime + ":00")),
     };
-
+    dispatch({ type: "FETCH_EVENTS_REQUEST" });
     fetch("https://ik-react-task.herokuapp.com/events/", {
       method: "POST",
       headers: {

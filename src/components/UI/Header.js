@@ -4,10 +4,12 @@ import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import AuthContext from "../../store/AuthContext";
+import EventsContext from "../../store/EventsContext";
 import classes from "./Header.module.css";
 
 const Header = (props) => {
   const { authState, dispatch } = useContext(AuthContext);
+  const { eventsState } = useContext(EventsContext);
 
   const logoutHandler = () => {
     localStorage.removeItem("auth");
@@ -34,7 +36,12 @@ const Header = (props) => {
           )}
           {authState.isLoggedIn && (
             <li>
-              <button onClick={props.showAddEventHandler}>Add Event</button>
+              <button
+                onClick={props.showAddEventHandler}
+                disabled={eventsState.isLoading}
+              >
+                Add Event
+              </button>
             </li>
           )}
           {authState.isLoggedIn && (

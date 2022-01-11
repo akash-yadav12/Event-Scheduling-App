@@ -57,10 +57,9 @@ const get12HoursTime = (time) => {
 const Events = () => {
   const { eventsState, dispatch } = useContext(EventsContext);
   const [showCalendar, setShowCalendar] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const toastRef = useRef();
   useEffect(() => {
-    setIsLoading(true);
+    dispatch({ type: "FETCH_EVENTS_REQUEST" });
     fetch("https://ik-react-task.herokuapp.com/events", {
       method: "GET",
       headers: {
@@ -70,11 +69,9 @@ const Events = () => {
     })
       .then((res) => res.json())
       .then((resData) => {
-        setIsLoading(false);
         dispatch({ type: "FETCH_EVENTS", events: resData });
       })
       .catch((err) => {
-        setIsLoading(false);
         toastRef.current.addToastMessage({
           message: JSON.stringify(err),
           type: "error",
@@ -89,7 +86,7 @@ const Events = () => {
   const hideCalendarHandler = (e) => {
     setShowCalendar(false);
   };
-  if (isLoading) return <p align="center">Loading....</p>;
+  if (eventsState.isLoading) return <p align="center">Loading....</p>;
   return (
     <>
       <ToastMessage ref={toastRef} />
