@@ -15,6 +15,7 @@ const AuthForm = (props) => {
           id="email"
           type="email"
           placeholder="enter email"
+          required
         />
       </div>
       <div className={classes.input}>
@@ -25,6 +26,7 @@ const AuthForm = (props) => {
           id="password"
           type="password"
           placeholder="enter password"
+          required
         />
       </div>
       <button type="submit">{props.btnText}</button>
