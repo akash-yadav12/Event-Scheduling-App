@@ -98,7 +98,7 @@ const Events = () => {
             title="close modal"
           >
             {" "}
-            𐤕{" "}
+            X{" "}
           </div>
           <FullCalendar
             plugins={[dayGridPlugin]}
