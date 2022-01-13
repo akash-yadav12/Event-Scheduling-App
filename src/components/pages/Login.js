@@ -38,6 +38,11 @@ const Login = () => {
             message: resData["non_field_errors"][0],
             type: "error",
           });
+        } else if (resData.password) {
+          toastRef.current.addToastMessage({
+            message: resData.password[0],
+            type: "error",
+          });
         } else {
           localStorage.setItem("auth", resData.token);
           dispatch({ type: "LOGIN", token: resData.token });
