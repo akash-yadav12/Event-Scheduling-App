@@ -72,6 +72,22 @@ const AddEvent = (props) => {
       (endDate.getMonth() + 1) +
       "-" +
       endDate.getDate();
+    if (start - end === 1) {
+      console.log(start, end, "ehck");
+      return;
+    }
+    if (+end.substring(7, 10) - +start.substring(7, 10) === 1) {
+      const f =
+        endTime.substring(0, 2) === "00" ? "24" : endTime.substring(0, 2);
+      if (!checkDurValid(startTime.split(":"), [f, endTime.substring(3, 5)])) {
+        toastRef.current.addToastMessage({
+          message:
+            "Please make sure duration of the event is atleast 30 minutes",
+          type: "error",
+        });
+        return;
+      }
+    }
     if (start === end || start > end) {
       if (endTime <= startTime || start > end) {
         toastRef.current.addToastMessage({
