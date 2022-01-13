@@ -184,7 +184,10 @@ const AddEvent = (props) => {
             <div>Start Date and Time</div>
             <DatePicker
               selected={startDate}
-              onChange={(date) => setStartDate(date)}
+              onChange={(date) => {
+                setEndDate("");
+                setStartDate(date);
+              }}
               minDate={new Date()}
               required
             />
