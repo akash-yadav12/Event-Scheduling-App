@@ -159,7 +159,7 @@
   transition: all 0.4s ease;
 }
 .calendarBtn:hover {
-  transform: translateY(-3px);
+  opacity: 0.9;
 }
 .calendarBtn:active {
   transform: scale(0.98) translateY(0);

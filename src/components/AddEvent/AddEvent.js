@@ -11,7 +11,6 @@ import EventsContext from "../../store/EventsContext";
 import Modal from "../UI/Modal";
 import ToastMessage from "../UI/ToastMessage";
 import classes from "./AddEvent.module.css";
-import "../../index.css";
 
 const EventTypes = [
   { type: "Bootcamp", color: "navy" },

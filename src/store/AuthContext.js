@@ -6,7 +6,9 @@ const AuthContext = React.createContext();
 
 const initialState = {
   isLoggedIn:
-    localStorage.getItem("auth") && localStorage.getItem("auth").length > 0,
+    localStorage.getItem("auth") !== undefined &&
+    localStorage.getItem("auth") &&
+    localStorage.getItem("auth").length > 0,
   token: localStorage.getItem("auth"),
 };
 
