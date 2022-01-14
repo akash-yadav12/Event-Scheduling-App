@@ -17,7 +17,9 @@ body {
 .fc.fc-media-screen.fc-direction-ltr.fc-theme-standard {
   max-height: 90vh;
 }
-
+.fc-day-today .fc-daygrid-day-frame.fc-scrollgrid-sync-inner {
+  background-color: #b0f308;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
